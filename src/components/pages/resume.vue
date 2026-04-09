@@ -1,114 +1,123 @@
 <template>
-  <div class="min-h-screen bg-[#1c1c22] flex items-center justify-center pt-12 px-4 sm:px-6 lg:px-8 font-primary" >
-    <div class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-12 gap-12 p-4 bg-[#1c1b22] relative">
-      <div class="lg:col-span-4 flex flex-col gap-2">
-        <div class="text-start justify-center">
-          <h2 class="text-3xl font-bold mb-4">Why hire me?</h2>
-          <p class="text-gray-400 text-sm leading-relaxed mb-5">
+  <div class="resume-wrapper">
+    <div class="resume-container">
+      
+      <div class="resume-sidebar">
+        <div class="sidebar-header">
+          <h2 class="sidebar-title">Why hire me?</h2>
+          <p class="sidebar-desc">
             I am a fast learner with a strong work ethic and a genuine desire to contribute to the success of the company.
           </p>
         </div>
 
-        <div class="flex flex-col gap-4 w-full">
-          <div class="flex flex-col max-w-[380px] mx-auto xl:mx-0 gap-5">
-            <button @click='tabPosition = "experience"' class="w-full font-bold py-3 bg-[#28272c]">Experience</button>
-            <button @click='tabPosition = "education"' class="w-full font-bold py-3 bg-[#28272c] ">Education</button>
-            <button @click='tabPosition = "skills"' class="w-full font-bold py-3 bg-[#28272c] ">Skills</button>
-            <button @click='tabPosition = "about"' class="w-full font-bold py-3 bg-[#28272c] ">About me</button>
-          </div>
+        <div class="tab-list">
+          <button 
+            @click='tabPosition = "experience"' 
+            class="tab-btn" 
+            :class="{ active: tabPosition === 'experience' }"
+          >Experience</button>
+          <button 
+            @click='tabPosition = "education"' 
+            class="tab-btn" 
+            :class="{ active: tabPosition === 'education' }"
+          >Education</button>
+          <button 
+            @click='tabPosition = "skills"' 
+            class="tab-btn" 
+            :class="{ active: tabPosition === 'skills' }"
+          >Skills</button>
+          <button 
+            @click='tabPosition = "about"' 
+            class="tab-btn" 
+            :class="{ active: tabPosition === 'about' }"
+          >About me</button>
         </div>
       </div>
 
-      <div class="lg:col-span-8 flex flex-col text-start h-[550px]">
-        <div v-if="tabPosition === 'experience'" class="w-full h-full">
-          <div class="min-h-[120px] text-start justify-center">
-            <h2 class="text-3xl font-bold mb-4">{{ experienceList.title }}</h2>
-            <p class="text-gray-400 text-sm mb-8 leading-relaxed">{{ experienceList.description }}</p>
+      <div class="resume-content">
+        
+        <div v-if="tabPosition === 'experience'" class="tab-pane">
+          <div class="content-header">
+            <h2 class="content-title">{{ experienceList.title }}</h2>
+            <p class="content-desc">{{ experienceList.description }}</p>
           </div>
-
-          <div class="h-[440px] overflow-y-auto pr-4 custom-scrollbar">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="scroll-container">
+            <div class="grid-2-cols">
               <div
-                  v-for="(item, index) in experienceList.info"
-                  :key="index"
-                  class="bg-[#232329] p-6 rounded-xl flex flex-col justify-center gap-2 h-[180px] hover:bg-[#2a2a32] transition-colors cursor-pointer"
+                v-for="(item, index) in experienceList.info"
+                :key="index"
+                class="info-card"
               >
-                <span class="text-[#0AB2FA] font-semibold text-lg">{{ item.duration }}</span>
-                <h3 class="text-xl font-bold mt-1 text-white truncate" :title="item.position">{{ item.position }}</h3>
-                <div class="flex items-center gap-2 mt-2">
-                  <span class="w-1.5 h-1.5 rounded-full bg-[#0AB2FA]"></span>
-                  <span class="text-gray-400 text-sm truncate" :title="item.company">{{ item.company }}</span>
+                <span class="info-duration">{{ item.duration }}</span>
+                <h3 class="info-title" :title="item.position">{{ item.position }}</h3>
+                <div class="info-subtitle-wrapper">
+                  <span class="info-dot"></span>
+                  <span class="info-subtitle" :title="item.company">{{ item.company }}</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div v-else-if="tabPosition === 'education'" class="w-full h-full">
-          <div class="min-h-[120px] text-start justify-center">
-            <h2 class="text-3xl font-bold mb-4">{{ educationList.title }}</h2>
-            <p class="text-gray-400 text-sm mb-8 leading-relaxed">{{ educationList.description }}</p>
+        <div v-else-if="tabPosition === 'education'" class="tab-pane">
+          <div class="content-header">
+            <h2 class="content-title">{{ educationList.title }}</h2>
+            <p class="content-desc">{{ educationList.description }}</p>
           </div>
-
-          <div class="h-[440px] overflow-y-auto pr-4 custom-scrollbar">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="scroll-container">
+            <div class="grid-2-cols">
               <div
-                  v-for="(item, index) in educationList.info"
-                  :key="index"
-                  class="bg-[#232329] p-6 rounded-xl flex flex-col justify-center gap-2 h-[180px] hover:bg-[#2a2a32] transition-colors cursor-pointer"
+                v-for="(item, index) in educationList.info"
+                :key="index"
+                class="info-card"
               >
-                <span class="text-[#0AB2FA] font-semibold text-lg">{{ item.duration }}</span>
-                <h3 class="text-xl font-bold mt-1 text-white truncate" :title="item.degree">{{ item.degree }}</h3>
-                <div class="flex items-center gap-2 mt-2">
-                  <span class="w-1.5 h-1.5 rounded-full bg-[#0AB2FA]"></span>
-                  <span class="text-gray-400 text-sm truncate" :title="item.institution">{{ item.institution }}</span>
+                <span class="info-duration">{{ item.duration }}</span>
+                <h3 class="info-title" :title="item.degree">{{ item.degree }}</h3>
+                <div class="info-subtitle-wrapper">
+                  <span class="info-dot"></span>
+                  <span class="info-subtitle" :title="item.institution">{{ item.institution }}</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div v-else-if="tabPosition === 'skills'" class="w-full h-full">
-          <div class="min-h-[120px] text-start justify-center">
-            <h2 class="text-3xl font-bold mb-4">{{ skill.title }}</h2>
-            <p class="text-gray-400 text-sm mb-8 leading-relaxed">{{ skill.description }}</p>
+        <div v-else-if="tabPosition === 'skills'" class="tab-pane">
+          <div class="content-header">
+            <h2 class="content-title">{{ skill.title }}</h2>
+            <p class="content-desc">{{ skill.description }}</p>
           </div>
-
-          <div class="h-[480px] overflow-y-auto pr-4 custom-scrollbar">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div class="scroll-container skills-scroll">
+            <div class="grid-4-cols">
               <div
-                  v-for="(item, index) in skill.info"
-                  :key="index"
-                  class="bg-[#232329] h-[150px] rounded-xl flex flex-col items-center justify-center gap-4 hover:bg-[#2a2a32] transition-colors group"
+                v-for="(item, index) in skill.info"
+                :key="index"
+                class="skill-card"
               >
-                <div class="text-5xl text-white group-hover:text-[#0AB2FA] transition-colors">
-                  <font-awesome-icon
-                      :icon="item.icon"
-                      class="text-5xl group-hover:text-[#0AB2FA] transition-colors"
-                  />
-                </div>
-                <span class="font-semibold tracking-wider">{{ item.name }}</span>
+                <font-awesome-icon
+                  :icon="item.icon"
+                  class="skill-icon"
+                />
+                <span class="skill-name">{{ item.name }}</span>
               </div>
             </div>
           </div>
         </div>
 
-        <div v-else-if="tabPosition === 'about'" class="w-full h-full">
-          <div class="min-h-[120px] text-start justify-center">
-            <h2 class="text-3xl font-bold mb-4">{{ aboutMe.title }}</h2>
-            <p class="text-gray-400 text-sm mb-8 leading-relaxed">{{ aboutMe.description }}</p>
+        <div v-else-if="tabPosition === 'about'" class="tab-pane">
+          <div class="content-header">
+            <h2 class="content-title">{{ aboutMe.title }}</h2>
+            <p class="content-desc">{{ aboutMe.description }}</p>
           </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-10">
-            <div v-for="(item, index) in aboutMe.info" :key="index" class="flex items-center gap-5">
-              <span class="text-gray-400 text-sm font-medium w-fit">{{ item.fieldName }}</span>
-              <span class="text-xl font-bold text-white">{{ item.fieldValue }}</span>
+          <div class="about-grid">
+            <div v-for="(item, index) in aboutMe.info" :key="index" class="about-item">
+              <span class="about-label">{{ item.fieldName }}</span>
+              <span class="about-value">{{ item.fieldValue }}</span>
             </div>
           </div>
         </div>
 
       </div>
-
     </div>
   </div>
 </template>
@@ -116,41 +125,19 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-
 const tabPosition = ref('experience');
 
 const aboutMe = {
   title: 'About me',
   description: 'Lorem asdfasf asdfq erqw afaso ii9i jiojoij jhiuh uhioua oiuho iuagrb hakjw hasdkf qrke',
   info: [
-    {
-      fieldName: "Name",
-      fieldValue: "Duong",
-    },
-    {
-      fieldName: "Phone",
-      fieldValue: "(+84) 819 951 939",
-    },
-    {
-      fieldName: "GitHub",
-      fieldValue: "leeduong05112005",
-    },
-    {
-      fieldName: "Nationality",
-      fieldValue: "Viet Nam",
-    },
-    {
-      fieldName: "Freelance",
-      fieldValue: "Available",
-    },
-    {
-    fieldName: "Language",
-    fieldValue: "English",
-    },
-    {
-      fieldName: "Email",
-      fieldValue: "leduong05112005@gmail.com",
-    },
+    { fieldName: "Name", fieldValue: "Duong" },
+    { fieldName: "Phone", fieldValue: "(+84) 819 951 939" },
+    { fieldName: "GitHub", fieldValue: "leeduong05112005" },
+    { fieldName: "Nationality", fieldValue: "Viet Nam" },
+    { fieldName: "Freelance", fieldValue: "Available" },
+    { fieldName: "Language", fieldValue: "English" },
+    { fieldName: "Email", fieldValue: "leduong05112005@gmail.com" }
   ]
 }
 
@@ -158,11 +145,7 @@ const experienceList = {
   title: 'My experience',
   description: 'Lorem asdfasf asdfq erqw afaso ii9i jiojoij jhiuh uhioua oiuho iuagrb hakjw hasdkf qrke',
   info: [
-    {
-      company: 'MK Group',
-      position: 'Front-end Developer',
-      duration: '2025 - 2026'
-    },
+    { company: 'MK Group', position: 'Front-end Developer', duration: '2025 - 2026' }
   ]
 }
 
@@ -170,60 +153,311 @@ const educationList = {
   title: 'My education',
   description: 'Lorem ...',
   info: [
-    {
-      institution : "Online Course Platform",
-      degree: "Full Stak Web Development Bootcamp",
-      duration: "2023"
-    },
-    {
-      institution : "Codecademy",
-      degree: "Front-end Track",
-      duration: '2023'
-    },
-    {
-      institution : "Online Course",
-      degree: "Programming Course",
-      duration: '2023 - 2024'
-    },
+    { institution : "Online Course Platform", degree: "Full Stack Web Development Bootcamp", duration: "2023" },
+    { institution : "Codecademy", degree: "Front-end Track", duration: '2023' },
+    { institution : "Online Course", degree: "Programming Course", duration: '2023 - 2024' }
   ]
 }
 
-const skill =  {
+const skill = {
   title: 'My skills',
   description: "Lorem...",
   info: [
-    {
-      icon: ['fab', 'vuejs'],
-      name: 'vue.js',
-    },
-    {
-      icon: ['fab', 'html5'],
-      name: 'html 5',
-    },
-    {
-      icon: ['fab', 'css3'],
-      name: 'css 3',
-    },
-    {
-      icon: ['fab', 'js'],
-      name: 'javascript',
-    }
+    { icon: ['fab', 'vuejs'], name: 'vue.js' },
+    { icon: ['fab', 'html5'], name: 'html 5' },
+    { icon: ['fab', 'css3'], name: 'css 3' },
+    { icon: ['fab', 'js'], name: 'javascript' }
   ]
 }
 </script>
 
 <style scoped>
-/* Scrollbar Styling */
-.custom-scrollbar::-webkit-scrollbar {
+.resume-wrapper {
+  min-height: 100vh;
+  background-color: #1c1c22;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 16px;
+  color: #ffffff;
+  box-sizing: border-box;
+}
+
+.resume-container {
+  width: 100%;
+  max-width: 1152px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  padding: 16px;
+  background-color: #1c1b22;
+  position: relative;
+}
+
+@media (min-width: 1024px) {
+  .resume-container {
+    grid-template-columns: repeat(12, 1fr);
+  }
+  .resume-sidebar {
+    grid-column: span 4;
+  }
+  .resume-content {
+    grid-column: span 8;
+  }
+}
+
+.resume-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar-header {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.sidebar-title {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.sidebar-desc {
+  color: #9ca3af;
+  font-size: 14px;
+  line-height: 1.625;
+}
+
+.tab-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+@media (min-width: 1280px) {
+  .tab-list {
+    margin: 0;
+  }
+}
+
+.tab-btn {
+  width: 100%;
+  font-weight: bold;
+  padding: 12px 0;
+  background-color: #28272c;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tab-btn:hover {
+  background-color: #2f2e33;
+}
+
+.tab-btn.active {
+  background-color: #0ab2fa;
+  color: #ffffff;
+}
+
+.resume-content {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  height: 550px;
+}
+
+.tab-pane {
+  width: 100%;
+  height: 100%;
+}
+
+.content-header {
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.content-title {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.content-desc {
+  color: #9ca3af;
+  font-size: 14px;
+  line-height: 1.625;
+  margin-bottom: 32px;
+}
+
+.scroll-container {
+  height: 440px;
+  overflow-y: auto;
+  padding-right: 16px;
+}
+
+.skills-scroll {
+  height: 480px;
+}
+
+.scroll-container::-webkit-scrollbar {
   width: 6px;
 }
-.custom-scrollbar::-webkit-scrollbar-track {
+.scroll-container::-webkit-scrollbar-track {
   background: #1c1b22;
 }
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #0AB2FA;
+.scroll-container::-webkit-scrollbar-thumb {
+  background-color: #0ab2fa;
   border-radius: 20px;
 }
 
+.grid-2-cols {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
 
+@media (min-width: 768px) {
+  .grid-2-cols {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.info-card {
+  background-color: #232329;
+  padding: 24px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  height: 180px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.info-card:hover {
+  background-color: #2a2a32;
+}
+
+.info-duration {
+  color: #0ab2fa;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.info-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 4px;
+}
+
+.info-subtitle-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.info-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #0ab2fa;
+}
+
+.info-subtitle {
+  color: #9ca3af;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.grid-4-cols {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .grid-4-cols {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.skill-card {
+  background-color: #232329;
+  height: 150px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  transition: background-color 0.3s;
+}
+
+.skill-card:hover {
+  background-color: #2a2a32;
+}
+
+.skill-icon {
+  font-size: 48px;
+  color: #ffffff;
+  transition: color 0.3s;
+}
+
+.skill-card:hover .skill-icon {
+  color: #0ab2fa;
+}
+
+.skill-name {
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: capitalize;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 24px;
+  column-gap: 40px;
+}
+
+@media (min-width: 768px) {
+  .about-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.about-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.about-label {
+  color: #9ca3af;
+  font-size: 14px;
+  font-weight: 500;
+  width: max-content;
+}
+
+.about-value {
+  font-size: 20px;
+  font-weight: bold;
+  color: #ffffff;
+}
 </style>

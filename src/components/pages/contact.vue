@@ -1,16 +1,17 @@
 <template>
-  <div class="min-h-screen bg-[#1c1c22] flex items-center justify-center pt-12 px-4 sm:px-6 lg:px-8 font-primary" >
-    <div class="container mx-auto max-w-7xl">
-      <div class="flex flex-col xl:flex-row gap-[30px]">
-
-        <div class="xl:w-[60%] order-2 xl:order-none">
-          <form class="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl text-start">
-            <h3 class="text-4xl text-[#0AB2FA] font-bold">Let's work together</h3>
-            <p class="text-white/60 text-sm leading-relaxed">
+  <div class="contact-wrapper">
+    <div class="contact-container">
+      
+      <div class="contact-content">
+        
+        <div class="contact-form-section">
+          <form class="form-card">
+            <h3 class="form-title">Let's work together</h3>
+            <p class="form-desc">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum nihil sapiente pariatur id totam.
             </p>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 flex">
+            <div class="input-grid">
               <el-input v-model="firstname" placeholder="Firstname" class="input-dark" />
               <el-input v-model="lastname" placeholder="Lastname" class="input-dark" />
               <el-input v-model="email" placeholder="Email address" class="input-dark" />
@@ -18,10 +19,10 @@
             </div>
 
             <el-select
-                v-model="service"
-                placeholder="Select a service"
-                class="custom-select w-full"
-                popper-class="custom-dropdown"
+              v-model="service"
+              placeholder="Select a service"
+              class="custom-select w-full"
+              popper-class="custom-dropdown"
             >
               <el-option label="Web Development" value="web" />
               <el-option label="UI/UX Design" value="uiux" />
@@ -30,32 +31,30 @@
             </el-select>
 
             <el-input
-                v-model="message"
-                type="textarea"
-                :rows="6"
-                placeholder="Type your message here."
-                class="custom-textarea"
+              v-model="message"
+              type="textarea"
+              :rows="6"
+              placeholder="Type your message here."
+              class="custom-textarea"
             />
 
-            <div class="mt-2">
-              <el-button class="!bg-[#0AB2FA] !text-[#1c1c22] !border-none !rounded-full !px-10 !py-6 !font-bold hover:!bg-[#0AB2FA]/80 transition-all">
+            <div class="submit-wrapper">
+              <el-button class="submit-btn">
                 Send message
               </el-button>
             </div>
           </form>
         </div>
 
-        <div class="flex-1 flex items-center xl:justify-center order-1 xl:order-none mb-8 xl:mb-0">
-          <ul class="flex flex-col gap-10">
-            <li v-for="(item, index) in info" :key="index" class="flex items-center gap-6">
-              <div class="w-[52px] h-[52px] xl:w-[72px] xl:h-[72px] bg-[#27272c] text-[#0AB2FA] rounded-md flex items-center justify-center">
-                <div class="text-[28px]">
-                  <font-awesome-icon :icon="item.icon" />
-                </div>
+        <div class="contact-info-section">
+          <ul class="info-list">
+            <li v-for="(item, index) in info" :key="index" class="info-item">
+              <div class="icon-box">
+                <font-awesome-icon :icon="item.icon" class="info-icon" />
               </div>
-              <div class="flex-1 text-start">
-                <p class="text-white/60 text-[28px] mb-1 text-[#0AB2FA]">{{ item.title }}</p>
-                <h3 class="text-xl text-white font-semibold">{{ item.desc }}</h3>
+              <div class="info-text">
+                <p class="info-label">{{ item.title }}</p>
+                <h3 class="info-value">{{ item.desc }}</h3>
               </div>
             </li>
           </ul>
@@ -90,12 +89,190 @@ const info = [
   {
     icon: ['fas', 'location-dot'],
     title: 'Address',
-    desc: "Mễ trì, Nam Từ Liêm, Hà Nội"
+    desc: "Từ Liêm, Hà Nội"
   },
 ]
 </script>
 
 <style scoped>
+
+.contact-wrapper {
+  min-height: 100vh;
+  background-color: #1c1c22;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 16px;
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .contact-wrapper { padding: 48px 24px; }
+}
+
+@media (min-width: 1024px) {
+  .contact-wrapper { padding: 48px 32px; }
+}
+
+.contact-container {
+  width: 100%;
+  max-width: 1280px; 
+  margin: 0 auto;
+}
+
+.contact-content {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+@media (min-width: 1280px) {
+  .contact-content {
+    flex-direction: row;
+  }
+}
+
+.contact-form-section {
+  order: 2; 
+}
+
+@media (min-width: 1280px) {
+  .contact-form-section {
+    width: 60%;
+    order: 1; 
+  }
+}
+
+.form-card {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 40px;
+  background-color: #27272c;
+  border-radius: 12px;
+  text-align: left;
+}
+
+.form-title {
+  font-size: 36px; 
+  color: #0ab2fa;
+  font-weight: bold;
+  margin: 0;
+}
+
+.form-desc {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  line-height: 1.625;
+  margin: 0;
+}
+
+.input-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .input-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.submit-wrapper {
+  margin-top: 8px;
+}
+
+:deep(.submit-btn) {
+  background-color: #0ab2fa !important;
+  color: #1c1c22 !important;
+  border: none !important;
+  border-radius: 9999px !important;
+  padding: 24px 40px !important;
+  font-weight: bold !important;
+  font-size: 16px !important;
+  transition: background-color 0.3s ease !important;
+}
+
+:deep(.submit-btn:hover) {
+  background-color: rgba(10, 178, 250, 0.8) !important;
+}
+
+.contact-info-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  order: 1; /* Trên mobile nằm trên */
+  margin-bottom: 32px;
+}
+
+@media (min-width: 1280px) {
+  .contact-info-section {
+    justify-content: center;
+    order: 2; /* Trên desktop nằm phải */
+    margin-bottom: 0;
+  }
+}
+
+.info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.icon-box {
+  width: 52px;
+  height: 52px;
+  background-color: #27272c;
+  color: #0ab2fa;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info-icon {
+  font-size: 28px;
+}
+
+@media (min-width: 1280px) {
+  .icon-box {
+    width: 72px;
+    height: 72px;
+  }
+}
+
+.info-text {
+  flex: 1;
+  text-align: left;
+}
+
+.info-label {
+  color: #0ab2fa;
+  font-size: 16px;
+  margin-bottom: 4px;
+  margin-top: 0;
+}
+
+.info-value {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.w-full {
+  width: 100%;
+}
 
 :deep(.input-dark) {
   height: 48px;
@@ -107,30 +284,23 @@ const info = [
   background-color: #232329;
   border-radius: 6px;
   padding: 0 14px;
-
   border: 1px solid rgba(255, 255, 255, 0);
   box-shadow: 0 0 0 rgba(255, 255, 255, 0);
   transition: border-color 0.2s ease;
 }
 
-/* hover */
-:deep(.input-dark:hover .el-input__wrapper) {
+:deep(.input-dark:hover .el-input__wrapper),
+:deep(.input-dark:focus .el-input__wrapper),
+:deep(.input-dark.is-focus .el-input__wrapper) {
   border-color: #0ab2fa;
 }
 
-/* focus */
-:deep(.input-dark:focus .el-input__wrapper) {
-  border-color: #0ab2fa;
-}
-
-/* text */
 :deep(.input-dark .el-input__inner) {
   color: #ffffff;
   font-size: 15px;
   font-weight: 300;
 }
 
-/* placeholder */
 :deep(.input-dark .el-input__inner::placeholder) {
   color: rgba(255, 255, 255, 0.6);
 }
@@ -144,35 +314,26 @@ const info = [
   background: #232329;
   border-radius: 6px;
   padding: 0 14px;
-
   border: 1px solid rgba(255, 255, 255, 0);
   box-shadow: none;
-
   transition: border-color 0.2s ease;
 }
 
-/* hover */
-:deep(.custom-select:hover .el-select__wrapper) {
-  border-color: #0ab2fa;
-}
-
-:deep(.el-select__wrapper.is-hovering:not(.is-focus)) {
-  box-shadow: 0 0 0 #000000;
-}
-
-/* focus */
+:deep(.custom-select:hover .el-select__wrapper),
 :deep(.custom-select.is-focus .el-select__wrapper) {
   border-color: #0ab2fa;
 }
 
-/* text */
+:deep(.el-select__wrapper.is-hovering:not(.is-focus)) {
+  box-shadow: 0 0 0 transparent;
+}
+
 :deep(.custom-select .el-input__inner) {
   color: #ffffff;
   font-size: 15px;
   font-weight: 300;
 }
 
-/* dropdown */
 :deep(.custom-dropdown) {
   background-color: #27272c;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -182,45 +343,38 @@ const info = [
   color: #ffffff;
 }
 
-:deep(.custom-dropdown .el-select-dropdown__item.is-selected) {
-  color: #0ab2fa;
+:deep(.custom-dropdown .el-select-dropdown__item.hover),
+:deep(.custom-dropdown .el-select-dropdown__item:hover) {
+  background-color: #232329;
 }
 
-/* =========================
-   EL-TEXTAREA
-========================= */
+:deep(.custom-dropdown .el-select-dropdown__item.is-selected) {
+  color: #0ab2fa;
+  font-weight: bold;
+}
+
+
 :deep(.custom-textarea .el-textarea__inner) {
   background-color: #232329;
   border-radius: 8px;
   padding: 12px 14px;
-
   border: 1px solid rgba(255, 255, 255, 0);
   box-shadow: none;
-
   color: #ffffff;
   font-size: 15px;
   font-weight: 300;
-  height: 80px;
-  max-height: 200px;
-  overflow: hidden;
-
+  min-height: 120px !important;
+  max-height: 250px;
+  overflow-y: auto;
   transition: border-color 0.2s ease;
 }
 
-/* hover */
-:deep(.custom-textarea .el-textarea__inner:hover) {
-  border-color: #0ab2fa;
-}
-
-/* focus */
+:deep(.custom-textarea .el-textarea__inner:hover),
 :deep(.custom-textarea .el-textarea__inner:focus) {
   border-color: #0ab2fa;
 }
 
-/* placeholder */
 :deep(.custom-textarea .el-textarea__inner::placeholder) {
   color: rgba(255, 255, 255, 0.6);
 }
-
-
 </style>
