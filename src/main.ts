@@ -9,9 +9,9 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import { faUserSecret, faThumbsUp, faPhone, faEnvelope, faLocationDot } from '@fortawesome/free-solid-svg-icons'
-import { faFacebook, faVuejs, faHtml5, faCss3, faJs } from '@fortawesome/free-brands-svg-icons'
+import { faFacebook, faVuejs, faHtml5, faCss3, faJs, faPython } from '@fortawesome/free-brands-svg-icons'
 
-library.add(faUserSecret, faThumbsUp, faPhone, faEnvelope, faLocationDot, faFacebook, faVuejs, faHtml5, faCss3, faJs)
+library.add(faUserSecret, faThumbsUp, faPhone, faEnvelope, faLocationDot, faFacebook, faVuejs, faHtml5, faCss3, faJs, faPython)
 
 createApp(App)
     .use(router)
