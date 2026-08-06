@@ -1,7 +1,9 @@
 <template>
   <nav class="navbar">
     <div class="logo-container">
-      <router-link to="/" class="logo-text">TUNGDUONG</router-link>
+      <router-link to="/" class="logo-text">
+        <img src="/dist/fulllogo.png" alt="Company Logo" class="logo-img" />
+      </router-link>
     </div>
 
     <ul class="nav-links">
@@ -85,5 +87,11 @@
 
 .nav-links a.router-link-exact-active::after {
   width: 100%;
+}
+
+.logo-img {
+  max-height: 30px;
+  width: auto;
+  object-fit: contain;
 }
 </style>

@@ -32,7 +32,7 @@ export function useResumeData() {
 
   const aboutMe = {
     title: 'About me',
-    description: 'Lorem asdfasf asdfq erqw afaso ii9i jiojoij jhiuh uhioua oiuho iuagrb hakjw hasdkf qrke',
+    description: "",
     info: [
       { fieldName: 'Name', fieldValue: 'Le Nguyen Tung Duong' },
       { fieldName: 'Phone', fieldValue: '(+84) 819 951 939' },
@@ -58,7 +58,7 @@ export function useResumeData() {
     info: [
       { duration: '2023', institution: 'Online Course Platform', degree: 'Full Stack Web Development Bootcamp' },
       { duration: '2023', institution: 'Codecademy', degree: 'Front-end Track' },
-      { duration: '2023 - 2024', institution: 'Online Course', degree: 'Programming Course' }
+      { duration: '2023 - Curent', institution: 'Thang Long University', degree: 'Computer networks and data communications' }
     ]
   }
 
