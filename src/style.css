@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@import "tailwindcss";
+
+/* ==========================================================================
+   Design tokens – chỉnh màu / font tại đây, toàn site sẽ đổi theo.
+   Dùng trong template: bg-bg, bg-surface, text-fg, text-muted, text-accent,
+   border-line, font-mono ...
+   ========================================================================== */
+@theme {
+  --color-bg: #1c1b22;
+  --color-surface: #232329;
+  --color-surface-2: #2a2a32;
+  --color-line: rgb(255 255 255 / 0.09);
+  --color-fg: #f5f5f7;
+  --color-muted: #a3a3b2;
+  --color-accent: #0ab2fa;
+  --color-accent-ink: #04141d;
+  --color-success: #34d399;
+
+  --font-sans: "Google Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "Inconsolata", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+@layer base {
+  html {
+    color-scheme: dark; /* site chỉ có giao diện tối: tránh chữ bị đổi màu theo OS */
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  ::selection { background: var(--color-accent); color: var(--color-accent-ink); }
+}
+
+@layer components {
+  .container-page {
+    width: 100%;
+    max-width: 92rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 640px) { 
+    .container-page { 
+      padding-inline: 2rem; 
+    } 
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    text-transform: uppercase;
+  }
+
+  .page-title {
+    font-size: clamp(1.9rem, 4vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+
+  .lead { color: var(--color-muted); font-size: 1.05rem; max-width: 42rem; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 3rem;
+    padding: 0.7rem 1.5rem;
+    border-radius: 9999px;
+    border: 1px solid transparent;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn-primary { background: var(--color-accent); color: var(--color-accent-ink); }
+  .btn-primary:hover { background: #3cc4ff; }
+  .btn-ghost { border-color: var(--color-line); color: var(--color-fg); background: transparent; }
+  .btn-ghost:hover { border-color: var(--color-accent); color: var(--color-accent); }
+
+  .card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: 1rem;
+    transition: background-color .25s ease, border-color .25s ease, transform .25s ease;
+  }
+  .card-hover:hover { background: var(--color-surface-2); border-color: rgb(10 178 250 / .45); }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 9999px;
+    border: 1px solid var(--color-line);
+    background: rgb(255 255 255 / 0.04);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-fg);
+  }
+
+  .icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 9999px;
+    border: 1px solid rgb(10 178 250 / .6);
+    color: var(--color-accent);
+    transition: background-color .2s ease, color .2s ease, transform .2s ease;
+  }
+  .icon-btn:hover { background: var(--color-accent); color: var(--color-accent-ink); transform: translateY(-2px); }
+
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -4rem;
+    z-index: 100;
+    padding: 0.6rem 1rem;
+    border-radius: 0.5rem;
+    background: var(--color-accent);
+    color: var(--color-accent-ink);
+    font-weight: 600;
+    transition: top .2s ease;
+  }
+  .skip-link:focus { top: 1rem; }
+}
+
+/* Chuyển trang (dùng ở MainLayout) */
+.page-enter-active,
+.page-leave-active { transition: opacity .25s ease, transform .25s ease; }
+.page-enter-from { opacity: 0; transform: translateY(10px); }
+.page-leave-to { opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
