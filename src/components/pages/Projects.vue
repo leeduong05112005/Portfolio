@@ -54,5 +54,4 @@
 
 <script setup lang="ts">
 import { projects } from '../../data/projects'
-import { profile } from '../../data/profile'
 </script>
